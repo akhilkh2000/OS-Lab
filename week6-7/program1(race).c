@@ -18,7 +18,7 @@ void *Producer()
 			;
 		buffer[in] = next_produced;
 		in = (in + 1) % BUFFER_SIZE;
-		sleep(1);
+
 	}
 }
 
@@ -32,7 +32,7 @@ void *Consumer()
 		next_consumed = buffer[out];
 		out = (out + 1) % BUFFER_SIZE;
 		printf("Job %d finished\n", next_consumed);
-		sleep(1);
+
 	}
 }
 
@@ -43,5 +43,4 @@ int main()
 	pthread_create(&consumer_thread_id, NULL, Consumer, NULL);
 	pthread_join(producer_thread_id, NULL);
 	pthread_join(consumer_thread_id, NULL);
-	return 0;
 }

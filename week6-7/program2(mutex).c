@@ -16,7 +16,7 @@ void *Producer() {
     while (1) {
         pthread_mutex_lock(&mutex_variable);
         buffer[(i) % SIZE] = item;
-        printf("Producer has produced item: %d\n", item);
+        printf("Job %d started\n", item);
         item++;
         i++;
         pthread_cond_signal(&cond);
@@ -33,7 +33,7 @@ void *Consumer() {
             pthread_cond_wait(&cond, &mutex_variable);
         }
         item = buffer[(i - 1) % SIZE];
-        printf("Consumer has consumed item: %d\n", item);
+        printf("Job %d finished\n", item);
         i--;
         pthread_mutex_unlock(&mutex_variable);
         sleep(1);
